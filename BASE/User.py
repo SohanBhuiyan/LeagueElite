@@ -12,9 +12,9 @@ class User:
         self.champion_name = champion_name
 
     def convert_champ_id(self,champion_name):
-        script_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
+        curr_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
         rel_path = "JSON/championFull.json"
-        abs_file_path = os.path.join(script_dir, rel_path)
+        abs_file_path = os.path.join(curr_dir, rel_path)
 
         with open(abs_file_path, encoding='utf-8') as data_file:
             data = json.loads(data_file.read())

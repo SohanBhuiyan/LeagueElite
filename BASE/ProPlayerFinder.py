@@ -2,11 +2,11 @@ from urllib.request import urlopen
 import json
 import os
 
-api_key = "RGAPI-bb691d42-4587-4e19-8abe-b5c303699877"
+api_key = "RGAPI-6f0db99f-1bd8-4350-8d30-6544bc19f67d"
 
 # returns JSON of different high-tiered players
 def get_challenger_players():
-    url="https://na1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5?api_key=RGAPI-bb691d42-4587-4e19-8abe-b5c303699877"
+    url="https://na1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5?api_key={}".format(api_key)
     html = urlopen(url)
     data = json.load(html)
     return data
@@ -47,7 +47,7 @@ def find_pro_player():
 
 def create_player_json():
 
-    challenger_json = get_challFunenger_players()
+    challenger_json = get_challenger_players()
     grandmaster_json = get_grandmaster_players()
     master_json = get_master_players()
 
@@ -65,4 +65,33 @@ def create_player_json():
     with open(filename, 'w') as outfile:
         json.dump(master_json, outfile)
 
-create_player_json()
+
+"""
+@param: 
+jsonData: JSON data of different tiered players
+champId: the id that is associated with a champion name. Method in user class can convert champname to id
+"""
+def search_highest_mastery(jsonData, champId):
+    highest_mastery = 0
+    highest_summoner_name = None
+    url = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/ecM69CPIQgkLCtp-5hVthERBIFP8_ffWV0glkL7imnBOwSA/by-champion/{}?api_key={}"\
+        .format(champId, api_key)
+
+    for entry in jsonData["entries"]:
+        summonerId = entry["summonerId"]
+        # calling API for getting mastery
+        html = urlopen(url)
+        data = json.load(html)
+        if data["championPoints"] > highest_mastery:
+            highest_mastery = data["championPoints"]
+            highest_summoner_name = entry["summonerName"]
+    print("Summoner name: {} with mastery {}".format(highest_summoner_name, highest_mastery))
+
+data = get_challenger_players()
+champId = 201
+
+search_highest_mastery(data,champId)
+
+
+
+

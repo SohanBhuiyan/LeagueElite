@@ -29,5 +29,5 @@ def update_rosters():
 
 def get_highest_mastery_entry_for(champId):
     db = Database()
-    max_entry = db.select(" * FROM champion_mastery WHERE score=(SELECT MAX(score) FROM champion_mastery WHERE champId = {})".format(champId))
-    return max_entry[0] # the first and only element in the list
+    max_entry_list = db.select(" * FROM champion_mastery WHERE score=(SELECT MAX(score) FROM champion_mastery WHERE champId = {})".format(champId))
+    return max_entry_list[0] # the first and only element in the list

@@ -8,7 +8,7 @@ def loadJsonFromPath(abs_file_path):
 
 
 
-def convert_champName_to_id(champion_name):
+def convert_champ_name_to_id(champion_name):
     curr_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
     rel_path = "JSON/championFull.json"
     abs_file_path = os.path.join(curr_dir, rel_path)

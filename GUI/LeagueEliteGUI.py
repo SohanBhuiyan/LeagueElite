@@ -8,6 +8,7 @@
 
 from BASE.Utility import convert_champName_to_id
 from BASE.SERVICES.LeagueService import get_highest_mastery_entry_for
+from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI.SetUp import Ui_MainWindow
 from BASE.DATABASE.Database import Database
 

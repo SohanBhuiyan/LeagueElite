@@ -1,20 +1,10 @@
-# -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'LeagueEliteGUI.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
+from PyQt5 import QtCore, QtWidgets
 
-from BASE.Utility import convert_champName_to_id
-from BASE.SERVICES.LeagueService import get_highest_mastery_entry_for
-from PyQt5 import QtCore, QtGui, QtWidgets
-from GUI.SetUp import Ui_MainWindow
 from BASE.DATABASE.Database import Database
-
-
-
-
+from BASE.SERVICES.LeagueService import get_highest_mastery_entry_for
+from BASE.Utility import convert_champ_name_to_id
+from GUI.SetUp import Ui_MainWindow
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -40,7 +30,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def get_max_entry(self):
         champ_name = self.lineEdit.text()
-        champ_id = convert_champName_to_id(champ_name)
+        champ_id = convert_champ_name_to_id(champ_name)
         # returns a tuple ("summoner_name",points, champ_id)
         max_entry = get_highest_mastery_entry_for(champ_id)
 

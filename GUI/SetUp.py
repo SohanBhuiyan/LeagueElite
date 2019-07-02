@@ -1,5 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from GUI.Completer import get_autocomplete_list
+
+
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'LeagueEliteGUI.ui'
+#
+# Created by: PyQt5 UI code generator 5.12.3
+#
+# WARNING! All changes made in this file will be lost!
 class Ui_MainWindow(object):
     # generated setup code from pyqt5 GUI builder, designer
     def setupUi(self, MainWindow):
@@ -10,9 +20,13 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(60, 40, 131, 41))
         self.label.setObjectName("label")
+
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(200, 50, 113, 25))
         self.lineEdit.setObjectName("lineEdit")
+        completer = QtWidgets.QCompleter(get_autocomplete_list(),self.lineEdit)
+        self.lineEdit.setCompleter(completer)
+
         self.searchButton = QtWidgets.QPushButton(self.centralwidget)
         self.searchButton.setGeometry(QtCore.QRect(340, 50, 93, 28))
         self.searchButton.setObjectName("searchButton")

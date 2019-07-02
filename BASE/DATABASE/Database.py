@@ -1,5 +1,3 @@
-from BASE.User import User
-#RGAPI-8417de52-724e-4b1d-82a3-1b6dea174673
 import mysql.connector
 
 class Database:

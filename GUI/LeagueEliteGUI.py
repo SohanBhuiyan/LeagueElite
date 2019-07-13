@@ -13,20 +13,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.searchButton.clicked.connect(self.get_max_entry)
 
-    # actions for button click
+
     @QtCore.pyqtSlot()
-    def update_interface_with(self, max_entry):
-        db = Database()
+    def update_interface_with_entry(self, max_entry):
+        if max_entry == None: # no information for the specified champ
+            self.summoner_value.setText("No data for specified champion")
+            self.rank_value.setText("")
+            self.point_value.setText("")
+            return
+        else:
+            db = Database()
+            summoner_name = max_entry[0]
+            points = str(max_entry[1])
+            profile = db.select("tier FROM profiles WHERE summonername = \"{}\"".format(summoner_name))
+            rank = profile[0][0]
 
-        summoner_name = max_entry[0]
-        points = str(max_entry[1])
-        profile = db.select("tier FROM profiles WHERE summonername = \"{}\"".format(summoner_name))
-        rank = profile[0][0]
+            self.summoner_value.setText(summoner_name)
+            self.point_value.setText(points)
+            self.rank_value.setText(rank)
 
-        self.summoner_value.setText(summoner_name)
-        self.point_value.setText(points)
-        self.rank_value.setText(rank)
-
+    # actions for button click
     @QtCore.pyqtSlot()
     def get_max_entry(self):
         champ_name = self.lineEdit.text()
@@ -35,9 +41,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         max_entry = get_highest_mastery_entry_for(champ_id)
 
         if max_entry != None:
-            self.update_interface_with(max_entry)
+            self.update_interface_with_entry(max_entry)
         else:
-            print("No data for given champ")
+            self.update_interface_with_entry(None)
 
 
 
@@ -45,6 +51,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("Fusion")
     window = MainWindow()
+    window.setStyleSheet("QMainWindow {background: rgb(49,51,74);}")
     window.show()
     sys.exit(app.exec_())

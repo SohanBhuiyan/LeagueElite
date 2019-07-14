@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 from GUI.Completer import get_autocomplete_list
@@ -11,13 +11,6 @@ class Ui_MainWindow(object):
         MainWindow.resize(871, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-        #background imamge
-        """oImage = QImage("backgroundImg.jpg")
-        sImage = oImage.scaled(QSize(871, 600))  # resize Image to widgets size
-        palette = QPalette()
-        palette.setBrush(10, QBrush(sImage))  # 10 = Windowrole
-        self.setPalette(palette)"""
 
 
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
@@ -54,14 +47,19 @@ class Ui_MainWindow(object):
         font.setPointSize(26)
         self.summoner_value.setFont(font)
         self.summoner_value.setText("")
+        self.summoner_value.setAlignment(Qt.AlignCenter)
+        self.summoner_value.setStyleSheet( """QLabel {color: black; background-color:white;}""")
         self.summoner_value.setObjectName("summoner_value")
         self.verticalLayout.addWidget(self.summoner_value)
+
 
         self.point_value = QtWidgets.QLabel(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(26)
         self.point_value.setFont(font)
         self.point_value.setText("")
+        self.point_value.setAlignment(Qt.AlignCenter)
+        self.point_value.setStyleSheet( """QLabel {color: black; background-color:white;}""")
         self.point_value.setObjectName("point_value")
         self.verticalLayout.addWidget(self.point_value)
 
@@ -70,6 +68,8 @@ class Ui_MainWindow(object):
         font.setPointSize(26)
         self.rank_value.setFont(font)
         self.rank_value.setText("")
+        self.rank_value.setAlignment(Qt.AlignCenter)
+        self.rank_value.setStyleSheet( """QLabel {color: black; background-color:white;}""")
         self.rank_value.setObjectName("rank_value")
         self.verticalLayout.addWidget(self.rank_value)
 

@@ -1,10 +1,9 @@
 import json
 from urllib.request import urlopen
 
-
 class API:
 
-    API_KEY = "RGAPI-80bfbd27-4b4a-4cdf-ba03-e5799f151939"
+    API_KEY = "put your API Key Here "
 
     def get_all_champion_mastery_by_summonerID(self, summonerID):
         url = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{}?api_key={}".format(summonerID,self.API_KEY)

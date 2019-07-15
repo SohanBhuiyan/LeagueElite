@@ -1,8 +1,8 @@
-from BASE.SERVICES.API import API
-from BASE.DATABASE.Database import Database
 import json
-
 import os
+
+from BASE.DATABASE.Database import Database
+from BASE.SERVICES.API import API
 
 API = API()
 def update_rosters():
@@ -28,6 +28,12 @@ def update_rosters():
 
 
 def get_highest_mastery_entry_for(champId):
-    db = Database()
-    max_entry_list = db.select(" * FROM champion_mastery WHERE score=(SELECT MAX(score) FROM champion_mastery WHERE champId = {})".format(champId))
-    return max_entry_list[0] # the first and only element in the list
+    try:
+        if champId == None:
+            return None
+        db = Database()
+        max_entry_list = db.select(" * FROM champion_mastery WHERE score=(SELECT MAX(score) FROM champion_mastery WHERE champId = {})".format(champId))
+        return max_entry_list[0] # the first and only element in the list
+    except IndexError:
+        print("Error: Champ ID is either not valid or not present in the DB")
+        return None

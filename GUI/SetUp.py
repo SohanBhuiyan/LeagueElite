@@ -43,6 +43,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
 
         self.summoner_value = QtWidgets.QLabel(self.verticalLayoutWidget)
+        # so that user may copy the text on screen
+        self.summoner_value.setTextInteractionFlags(Qt.TextSelectableByMouse)
         font = QtGui.QFont()
         font.setPointSize(26)
         self.summoner_value.setFont(font)
@@ -64,6 +66,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.point_value)
 
         self.rank_value = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.rank_value.setTextInteractionFlags(Qt.TextSelectableByMouse)
         font = QtGui.QFont()
         font.setPointSize(26)
         self.rank_value.setFont(font)
